@@ -18,11 +18,10 @@
                 if ( !hasFinish ) {
                     flag = true;
                     hasFinish = true;
-                    var end_time = new Date().getTime();
-                    console.log('节点' + ip + '访问成功。加载时间：' + end_time - start_time + "ms.");
-                    if(fastest_time < end_time - start_time){
+                    console.log('节点' + ip + '访问成功。加载时间：' + new Date().getTime() - start_time + "ms.");
+                    if(fastest_time < new Date().getTime() - start_time){
                         fastest_ip = ip;
-                        fastest_time = end_time - start_time;
+                        fastest_time = new Date().getTime() - start_time;
                     }
                 }
             };
@@ -30,11 +29,10 @@
             if ( !hasFinish ) {
                 if ( !isCloseWifi ) {
                     flag = true;
-                    var end_time = new Date().getTime();
-                    console.log('节点' + ip + '访问成功。加载时间：' + end_time - start_time + "ms.");
-                    if(fastest_time < end_time - start_time){
+                    console.log('节点' + ip + '访问成功。加载时间：' + new Date().getTime() - start_time + "ms.");
+                    if(fastest_time < new Date().getTime() - start_time){
                         fastest_ip = ip;
-                        fastest_time = end_time - start_time;
+                        fastest_time = new Date().getTime() - start_time;
                     }
                 } else {
                     console.log('网络访问失败！');
@@ -51,10 +49,6 @@
                 hasFinish = true;
                 flag = false ;
                 console.log('节点' + ip + '连接失败。');
-                if(fastest_time < end_time - start_time){
-                    fastest_ip = ip;
-                    fastest_time = end_time - start_time;
-                }
             }
             }, 1500);
         }

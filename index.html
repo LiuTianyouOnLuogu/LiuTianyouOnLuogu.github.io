@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>天佑博客 - 跳转到合适的节点</title>
+</head> 
+<body>
+    <script>
+        var fastest_ip = "fail";
+        var fastest_time = 100000000;
+        function ping(ip) {
+            var start_time = getTime();
+            var img = new Image();
+            var start = new Date().getTime();
+            var flag = false;
+            var isCloseWifi = true;
+            var hasFinish = false;
+            img.onload = function() {
+                if ( !hasFinish ) {
+                    flag = true;
+                    hasFinish = true;
+                    var end_time = getTime();
+                    console.log('节点' + ip + '访问成功。加载时间：' + end_time - start_time + "ms.");
+                    if(fastest_time < end_time - start_time){
+                        fastest_ip = ip;
+                        fastest_time = end_time - start_time;
+                    }
+                }
+            };
+            img.onerror = function() {
+            if ( !hasFinish ) {
+                if ( !isCloseWifi ) {
+                    flag = true;
+                    var end_time = getTime();
+                    console.log('节点' + ip + '访问成功。加载时间：' + end_time - start_time + "ms.");
+                    if(fastest_time < end_time - start_time){
+                        fastest_ip = ip;
+                        fastest_time = end_time - start_time;
+                    }
+                } else {
+                    console.log('网络访问失败！');
+                }
+                hasFinish = true;
+            }
+            };
+            setTimeout(function(){
+                isCloseWifi = false;
+            },2);
+            img.src = 'https://' + ip + '/favicon.ico';
+            var timer = setTimeout(function() {
+            if ( !flag ) {
+                hasFinish = true;
+                flag = false ;
+                console.log('节点' + ip + '连接失败。');
+                if(fastest_time < end_time - start_time){
+                    fastest_ip = ip;
+                    fastest_time = end_time - start_time;
+                }
+            }
+            }, 1500);
+        }
+        ping("backup1.liutianyou.site");
+        ping("backup2.liutianyou.site");
+        ping("backup3.liutianyou.site");
+        ping("backup4.liutianyou.site");
+        function jump(){
+            location.href = "https://" + fastest_ip;
+        }
+        if(fastest_ip != "fail"){
+            document.write("连接成功：最快的节点是" + fastest_ip + "，加载时间：" + fastest_time + "ms.");
+            setTimeout("jump()", 3000);
+        }else{
+            document.write("所有节点都连接失败：请稍后再试……");
+        }
+      </script>
+</body>
+</html>

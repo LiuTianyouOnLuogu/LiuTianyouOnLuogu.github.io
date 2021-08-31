@@ -18,11 +18,7 @@
                 if ( !hasFinish ) {
                     flag = true;
                     hasFinish = true;
-                    console.log('节点' + ip + '访问成功。加载时间：' + new Date().getTime() - start + "ms.");
-                    if(fastest_time > new Date().getTime() - start){
-                        fastest_ip = ip;
-                        fastest_time = new Date().getTime() - start;
-                    }
+                    location.href = "https://" + ip;
                 }
             };
             img.onerror = function() {
@@ -30,10 +26,7 @@
                 if ( !isCloseWifi ) {
                     flag = true;
                     console.log('节点' + ip + '访问成功。加载时间：' + new Date().getTime() - start + "ms.");
-                    if(fastest_time > new Date().getTime() - start){
-                        fastest_ip = ip;
-                        fastest_time = new Date().getTime() - start;
-                    }
+                    location.href = "https://" + ip;
                 } else {
                     console.log('网络访问失败！');
                 }
@@ -56,15 +49,7 @@
         ping("backup2.liutianyou.site");
         ping("backup3.liutianyou.site");
         ping("backup4.liutianyou.site");
-        function jump(){
-            location.href = "https://" + fastest_ip;
-        }
-        if(fastest_ip != "fail"){
-            document.write("连接成功：最快的节点是" + fastest_ip + "，加载时间：" + fastest_time + "ms.");
-            setTimeout("jump()", 3000);
-        }else{
-            document.write("所有节点都连接失败：请稍后再试……");
-        }
+        document.write("所有节点都连接失败：请稍后再试……");
       </script>
 </body>
 </html>

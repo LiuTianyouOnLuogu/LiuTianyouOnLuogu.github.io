@@ -19,9 +19,9 @@
                     flag = true;
                     hasFinish = true;
                     console.log('节点' + ip + '访问成功。加载时间：' + new Date().getTime() - start_time + "ms.");
-                    if(fastest_time < new Date().getTime() - start_time){
+                    if(fastest_time > new Date().getTime() - start){
                         fastest_ip = ip;
-                        fastest_time = new Date().getTime() - start_time;
+                        fastest_time = new Date().getTime() - start;
                     }
                 }
             };
@@ -30,9 +30,9 @@
                 if ( !isCloseWifi ) {
                     flag = true;
                     console.log('节点' + ip + '访问成功。加载时间：' + new Date().getTime() - start_time + "ms.");
-                    if(fastest_time < new Date().getTime() - start_time){
+                    if(fastest_time > new Date().getTime() - start){
                         fastest_ip = ip;
-                        fastest_time = new Date().getTime() - start_time;
+                        fastest_time = new Date().getTime() - start;
                     }
                 } else {
                     console.log('网络访问失败！');

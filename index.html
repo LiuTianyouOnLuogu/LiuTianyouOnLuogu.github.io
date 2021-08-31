@@ -9,41 +9,13 @@
         var fastest_ip = "fail";
         var fastest_time = 100000000;
         function ping(ip) {
-            var img = new Image();
-            var start = new Date().getTime();
-            var flag = false;
-            var isCloseWifi = true;
-            var hasFinish = false;
-            img.onload = function() {
-                if ( !hasFinish ) {
-                    flag = true;
-                    hasFinish = true;
+            $.ajax({
+                "url": "https://" + ip,
+                "success": function(){
                     location.href = "https://" + ip;
-                }
-            };
-            img.onerror = function() {
-            if ( !hasFinish ) {
-                if ( !isCloseWifi ) {
-                    flag = true;
-                    console.log('节点' + ip + '访问成功。加载时间：' + new Date().getTime() - start + "ms.");
-                    location.href = "https://" + ip;
-                } else {
-                    console.log('网络访问失败！');
-                }
-                hasFinish = true;
-            }
-            };
-            setTimeout(function(){
-                isCloseWifi = false;
-            },2);
-            img.src = 'https://' + ip + '/';
-            var timer = setTimeout(function() {
-            if ( !flag ) {
-                hasFinish = true;
-                flag = false ;
-                console.log('节点' + ip + '连接失败。');
-            }
-            }, 1500);
+                },
+                "timeout": 2000
+            });
         }
         ping("backup1.liutianyou.site");
         ping("backup2.liutianyou.site");

@@ -9,7 +9,6 @@
         var fastest_ip = "fail";
         var fastest_time = 100000000;
         function ping(ip) {
-            var start_time = getTime();
             var img = new Image();
             var start = new Date().getTime();
             var flag = false;
@@ -19,7 +18,7 @@
                 if ( !hasFinish ) {
                     flag = true;
                     hasFinish = true;
-                    var end_time = getTime();
+                    var end_time = new Date().getTime();
                     console.log('节点' + ip + '访问成功。加载时间：' + end_time - start_time + "ms.");
                     if(fastest_time < end_time - start_time){
                         fastest_ip = ip;
@@ -31,7 +30,7 @@
             if ( !hasFinish ) {
                 if ( !isCloseWifi ) {
                     flag = true;
-                    var end_time = getTime();
+                    var end_time = new Date().getTime();
                     console.log('节点' + ip + '访问成功。加载时间：' + end_time - start_time + "ms.");
                     if(fastest_time < end_time - start_time){
                         fastest_ip = ip;
